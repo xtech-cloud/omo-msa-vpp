@@ -15,7 +15,7 @@
 
 ```
 export GIN_MODE=release
-export VPP_ADDR=:80
+export VPP_HTTP_ADDR=:80
 export VPP_CONFIG=/etc/omo/vpp.cfg
 ```
 

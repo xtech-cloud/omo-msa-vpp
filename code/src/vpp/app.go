@@ -10,5 +10,5 @@ func main() {
 	router := gin.Default()
 	router.Use(filterMiddleware())
 	router.Any("/*action", forward)
-	router.Run(env_addr)
+	router.Run(env_http_addr)
 }
