@@ -38,6 +38,7 @@ vpp.cfg
         {
             "endpoint":"/ams/*",
             "remote":"http://127.0.0.1:16001"
+        }
     ]
 }
 
