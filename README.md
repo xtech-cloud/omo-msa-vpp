@@ -8,15 +8,21 @@
 
 进入omo-msa-vpp目录，执行compile.sh脚本
 
+# 运行
+编译完成后运行 ./bin/vpp 
+
 
 # 部署
 
- 设置环境变量
+部署时候，可以按需设置环境变量，以下是默认值
 
 ```
-export GIN_MODE=release
+export GIN_MODE=release              //默认为 debug
 export VPP_HTTP_ADDR=:80
-export VPP_CONFIG=/etc/omo/vpp.cfg
+export VPP_HTTPS_ADDR=:443
+export VPP_CONFIG=/etc/vpp/vpp.cfg   //默认为./conf/vpp.cfg
+export VPP_TLS_CRT=/etc/vpp/tls.crt  //默认为./conf/tls.crt
+export VPP_TLS_KEY=/etc/vpp/tls.key  //默认为./conf/tls.key
 ```
 
 设置完环境变量后启动vpp
