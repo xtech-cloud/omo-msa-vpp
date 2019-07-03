@@ -6,10 +6,12 @@
 
 # 编译
 
-进入omo-msa-vpp目录，执行compile.sh脚本
+`go 版本需要大于1.11`
+
+进入omo-msa-vpp目录，执行go install
 
 # 运行
-编译完成后运行 ./bin/vpp 
+编译完成后运行 ~/go/bin/omo-msa-vpp
 
 
 # 部署
@@ -20,34 +22,29 @@
 export GIN_MODE=release              //默认为 debug
 export VPP_HTTP_ADDR=:80
 export VPP_HTTPS_ADDR=:443
-export VPP_CONFIG=/etc/vpp/vpp.cfg   //默认为./conf/vpp.cfg
+export VPP_CONFIG=/etc/vpp/vpp.yaml  //默认为./conf/vpp.yaml
 export VPP_TLS_CRT=/etc/vpp/tls.crt  //默认为./conf/tls.crt
 export VPP_TLS_KEY=/etc/vpp/tls.key  //默认为./conf/tls.key
 ```
 
-设置完环境变量后启动vpp
+设置完环境变量后启动omo-msa-vpp
 
 # 配置文件范例
 
-vpp.cfg
 
-```json
-{
-    "filter": {
-        "mode":"blacklist",
-        "url": [
-            "/test/*",
-            "/testlist"
-        ]
-    },
-    "forward": [
-        {
-            "endpoint":"/ams/*",
-            "remote":"http://127.0.0.1:16001"
-        }
-    ]
-}
-
+```
+http:
+  filter:
+    mod: 'blacklist'
+    url:
+      - '/console/*'
+      - '/account/signup'
+  forward:
+    -
+      endpoint: '/ams/*'
+      remote: 'http://192.168.0.10:16000'
+    -
+      endpoint: '/kms/*'
 ```
 
 过滤模式支持白名单(whitelist)和黑名单(blacklist)两种模式。
