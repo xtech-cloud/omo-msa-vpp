@@ -20,7 +20,7 @@ func setupEnv() {
 
 	env_config_path = os.Getenv("VPP_CONFIG")
 	if "" == env_config_path {
-		env_config_path = "./conf/vpp.cfg"
+		env_config_path = "./conf/vpp.yaml"
 	}
 
 	env_tls_crt = os.Getenv("VPP_TLS_CRT")

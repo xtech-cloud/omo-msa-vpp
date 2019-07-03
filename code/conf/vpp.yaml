@@ -1,0 +1,27 @@
+# 配置范例
+# http:
+#   filter:
+#     mod: 'blacklist'
+#     url:
+#       - '/console/*'
+#       - '/account/signup'
+#   forward:
+#     -
+#       endpoint: '/ams/*'
+#       remote: 'http://192.168.0.10:16000'
+#     -
+#       endpoint: '/kms/*'
+#       remote: 'http://192.168.0.23:17234'
+#
+
+http:
+    # 过滤支持白名单和黑名单机制,被过滤的路径访问将返回405错误
+    # 白名单模式下，仅url字段中配置的路径会放行
+    # 黑名单模式下，未出现在url字段中的路径会被放行
+    filter: 
+        # blacklist or whitelist
+        mod: 'blacklist' 
+        # 过滤路径,支持通配符*
+        url: []
+    # 转发支持通配符*
+    forward: []

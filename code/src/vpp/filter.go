@@ -7,8 +7,8 @@ import (
 )
 
 func isFilter(_url string) bool {
-	if config.Filter.Mode == "blacklist" {
-		for _, url := range config.Filter.URL {
+	if config.Http.Filter.Mode == "blacklist" {
+		for _, url := range config.Http.Filter.URL {
 			if "" == url {
 				continue
 			}
@@ -28,8 +28,8 @@ func isFilter(_url string) bool {
 		return false
 	}
 
-	if config.Filter.Mode == "whitelist" {
-		for _, url := range config.Filter.URL {
+	if config.Http.Filter.Mode == "whitelist" {
+		for _, url := range config.Http.Filter.URL {
 			if "" == url {
 				continue
 			}

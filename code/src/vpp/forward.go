@@ -10,7 +10,7 @@ import (
 )
 
 func getRemote(_url string) string {
-	for _, forward := range config.Forward {
+	for _, forward := range config.Http.Forward {
 		endpoint := forward.Endpoint
 		if strings.HasSuffix(endpoint, "*") {
 			if strings.HasPrefix(_url, endpoint[0:len(endpoint)-1]) {

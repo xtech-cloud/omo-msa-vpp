@@ -1,23 +1,28 @@
 package main
 
 import (
-	"encoding/json"
 	"io/ioutil"
+
+	yaml "gopkg.in/yaml.v2"
 )
 
+type HttpSection struct {
+	Filter  FilterSection    `yaml:"filter"`
+	Forward []ForwardSection `yaml:"forward"`
+}
+
 type FilterSection struct {
-	Mode string   `json:"mode"`
-	URL  []string `json:"url"`
+	Mode string   `yaml:"mode"`
+	URL  []string `yaml:"url"`
 }
 
 type ForwardSection struct {
-	Endpoint string `json:"endpoint"`
-	Remote   string `json:"remote"`
+	Endpoint string `yaml:"endpoint"`
+	Remote   string `yaml:"remote"`
 }
 
 type Config struct {
-	Filter  FilterSection    `json:"filter"`
-	Forward []ForwardSection `json:"forward"`
+	Http HttpSection `yaml:"http"`
 }
 
 var config Config
@@ -28,7 +33,7 @@ func setupConfig() {
 		panic(err)
 	}
 
-	err = json.Unmarshal(content, &config)
+	err = yaml.Unmarshal(content, &config)
 	if nil != err {
 		panic(err)
 	}
