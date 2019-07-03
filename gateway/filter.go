@@ -1,14 +1,15 @@
-package main
+package gateway
 
 import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/xtech-cloud/omo-msa-vpp/settings"
 )
 
 func isFilter(_url string) bool {
-	if config.Http.Filter.Mode == "blacklist" {
-		for _, url := range config.Http.Filter.URL {
+	if settings.GetConfig().Http.Filter.Mode == "blacklist" {
+		for _, url := range settings.GetConfig().Http.Filter.URL {
 			if "" == url {
 				continue
 			}
@@ -28,8 +29,8 @@ func isFilter(_url string) bool {
 		return false
 	}
 
-	if config.Http.Filter.Mode == "whitelist" {
-		for _, url := range config.Http.Filter.URL {
+	if settings.GetConfig().Http.Filter.Mode == "whitelist" {
+		for _, url := range settings.GetConfig().Http.Filter.URL {
 			if "" == url {
 				continue
 			}

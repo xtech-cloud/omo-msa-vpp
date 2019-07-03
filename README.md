@@ -22,6 +22,7 @@
 export GIN_MODE=release              //默认为 debug
 export VPP_HTTP_ADDR=:80
 export VPP_HTTPS_ADDR=:443
+export VPP_WS_ADDR=:8000
 export VPP_CONFIG=/etc/vpp/vpp.yaml  //默认为./conf/vpp.yaml
 export VPP_TLS_CRT=/etc/vpp/tls.crt  //默认为./conf/tls.crt
 export VPP_TLS_KEY=/etc/vpp/tls.key  //默认为./conf/tls.key

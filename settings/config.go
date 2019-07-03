@@ -1,10 +1,16 @@
-package main
+package settings
 
 import (
 	"io/ioutil"
 
 	yaml "gopkg.in/yaml.v2"
 )
+
+type WebSocketSection struct {
+	ReadTimeoutMs  int `yaml:"read_timeout"`
+	WriteTimeoutMs int `yaml:"write_timeout"`
+	IdleTimeoutMs  int `yaml:"idle_timeout"`
+}
 
 type HttpSection struct {
 	Filter  FilterSection    `yaml:"filter"`
@@ -22,13 +28,14 @@ type ForwardSection struct {
 }
 
 type Config struct {
-	Http HttpSection `yaml:"http"`
+	Http      HttpSection      `yaml:"http"`
+	WebSocket WebSocketSection `yaml:"websocket"`
 }
 
 var config Config
 
-func setupConfig() {
-	content, err := ioutil.ReadFile(env_config_path)
+func SetupConfig() {
+	content, err := ioutil.ReadFile(GetEnv().CONFIG_PATH)
 	if nil != err {
 		panic(err)
 	}
@@ -37,4 +44,8 @@ func setupConfig() {
 	if nil != err {
 		panic(err)
 	}
+}
+
+func GetConfig() *Config {
+	return &config
 }

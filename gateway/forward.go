@@ -1,4 +1,4 @@
-package main
+package gateway
 
 import (
 	"net/http"
@@ -7,10 +7,11 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/xtech-cloud/omo-msa-vpp/settings"
 )
 
 func getRemote(_url string) string {
-	for _, forward := range config.Http.Forward {
+	for _, forward := range settings.GetConfig().Http.Forward {
 		endpoint := forward.Endpoint
 		if strings.HasSuffix(endpoint, "*") {
 			if strings.HasPrefix(_url, endpoint[0:len(endpoint)-1]) {

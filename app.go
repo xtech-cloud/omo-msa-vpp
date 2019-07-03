@@ -1,15 +1,31 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"os"
+	"os/signal"
+	"syscall"
+
+	"github.com/xtech-cloud/omo-msa-vpp/gateway"
+	"github.com/xtech-cloud/omo-msa-vpp/settings"
 )
 
 func main() {
-	setupEnv()
-	setupConfig()
-	router := gin.Default()
-	router.Use(filterMiddleware())
-	router.Any("/*action", forward)
-	go router.RunTLS(env_https_addr, env_tls_crt, env_tls_key)
-	router.Run(env_http_addr)
+	settings.SetupEnv()
+	settings.SetupConfig()
+
+	httpGateway := &gateway.Http{}
+	httpGateway.Start()
+
+	wsGateway := &gateway.WebSocket{}
+	wsGateway.Start()
+
+	c := make(chan os.Signal, 2)
+	signal.Notify(c, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+
+	<-c
+
+	httpGateway.Stop()
+	wsGateway.Stop()
+
+	os.Exit(0)
 }
