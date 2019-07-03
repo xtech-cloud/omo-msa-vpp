@@ -20,7 +20,7 @@ http:
   # 黑名单模式下，未出现在url字段中的路径会被放行
   filter: 
     # blacklist or whitelist
-    mod: 'blacklist' 
+    mode: 'blacklist' 
     # 过滤路径,支持通配符*
     url: []
   # 转发支持通配符*

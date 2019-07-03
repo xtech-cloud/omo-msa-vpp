@@ -36,7 +36,7 @@ export VPP_TLS_KEY=/etc/vpp/tls.key  //默认为./conf/tls.key
 ```
 http:
   filter:
-    mod: 'blacklist'
+    mode: 'blacklist'
     url:
       - '/console/*'
       - '/account/signup'
@@ -46,6 +46,7 @@ http:
       remote: 'http://192.168.0.10:16000'
     -
       endpoint: '/kms/*'
+      remote: 'http://192.168.0.10:16002'
 ```
 
 过滤模式支持白名单(whitelist)和黑名单(blacklist)两种模式。
